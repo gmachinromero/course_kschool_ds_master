@@ -9,3 +9,4 @@ En este repositorio podrás encontrar los ficheros y notebooks que voy elaborand
 - 01_shell_git
 - 02_python_algebra_estadistica
 - 03_python_data_science
+- 04_visualizacion_datos
