@@ -63,9 +63,17 @@ Para listar el contenido de un directorio se escribe el comando dentro del mismo
 
 **Modificar permisos / chmod - change mode:**
 
-Mediante este comando se pueden modificar los permisos de lectura, escritura y ejecución de los ficheros, teniendo en cuenta si el usuario es usuario, grupo u otro.
+Mediante este comando se pueden modificar los permisos de lectura, escritura y ejecución de los ficheros, teniendo en cuenta si la clase es usuario, grupo u otro.
 
 El comando a utilizar es `chmod [u+rwx],[g+rwx],[o+rwx] file_name`. El símbolo `+` se sustituye por `-` si lo que se quiere es eliminar permisos de un tipo de usuario.
+
+Existe una forma abreviada de modificar los permisos de un fichero que se indica mediante un número de tres cifras. Cada crifra atiende respectivamente a las clases: usuario, grupo y otros; y el valor de cada cifra es la suma de los diferentes permisos que se tienen dentro de una clase.
+
+- Lectura: 4
+- Escritura: 2
+- Ejecución: 1
+
+Por ejemplo, si se quiere indicar que para un fichero el usuario va a tener permisos de lectura, escritura y ejecución (rwx), y que tanto las clases de grupo y otros van a tener permisos de lectura unicamente (r), se indicaría con el comando `chmod 744`.
 
 **Crea directorio / mkdir - make directory:**
 
@@ -114,7 +122,89 @@ Muestra por consola las primeras líneas que definamos de un fichero. La sintaxi
 
 Muestra por consola las últimas líneas que definamos de un fichero. La sintaxis es `tail -n K file`.
 
+**Contabilizar registros / wc - word count:**
+
+Muestra por consola tres datos: número de filas, palabra y bytes. La sintaxis es `wc file`.
+
+### 1.3.4. Anaizando ficheros
+
+**Ordenar ficheros / sort:**
+
+Este comando permite ordenar un fichero en base a diferentes condiciones. La sintaxis es `sort [opt] file`. Algunas de las opciones más comunes son:
+
+- `sort -d`: alfanumérico
+- `sort -n`: numérico
+- `sort -r`: inverso
+- `sort -f`: no se tienen en cuenta mayúsculas y minúsculas
+
+Las anteriores opciones pueden se pueden combinar entre sí. Adicionalmente, en ficheros con muchas columnas se pueden utilizar opciones más avanzadas para ordenar el mismo en base a un mayor número de parámetros:
+
+- `sort -t "delimiter"`: indica el delimitador del fichero
+- `sort -k M[,N]`: los campos clave para ordenar el fichero van desde la columna M hasta la N en caso de indicarse, si no hasta el final del fichero
+
+**Duplicados / uniq:**
+
+Este comando permite analizar las duplicidades dentro de un fichero, en función de las opciones de la herramienta se pueden obtener diferentes resultados. Para que este comando funcione correctamente, el fichero debe estar ordenado. La sintaxis es `uniq [opt] file`.
+
+Algunas de las opciones más comunes son:
+
+- `uniq -c`: añade un prefijo a las líneas con el número de ocurrencias
+- `uniq -d`: solo muestra aquellos registros duplicados
+
+Si se quieren eliminar los duplicados de un fichero, se tiene que recurrir al comando `sort -u file`.
+
+
+
+
+### 1.3.5. Entradas, salidas y redirecciones
+
+**Redirecciones:**
+
+De forma predeterminada, el último comando ejecutado en la shell es mostrado como salida en la terminal. Esta salida se puede guardar en un fichero mediante el comando`>`. Esto se denomina redirección.
+
+Si la información se redirecciona a un fichero que no existe este es creado automáticamente, sin embargo si ya existía, se sobreescribe. Si lo que se quiere es adjuntar información adicional a un fichero existente, se puede llevar a cabo mediante el comando `>>`.
+
+Ejemplo:
+
+- `head -n 10 optd_aircraft.csv > first_10_aircraft.txt`
+- `tail -n 10 optd_aircraft.csv > last_10_aircraft.txt`
+- `wc optd_aircraft.csv > number_of_lines.txt`
+
+### 1.3.6. Pipeline
+
+Como se indica al principio de este notebook, las herramientas de UNIX están pensadas para realizar una única opción pero con una eficiencia muy alta, ¿pero que ocurre cuando necesitamos realizar tareas más complejas?
+
+En la shell existe un comando denominado pipeline `|` que concatena herramientas más sencillas, permitiendo llevar a cabo operaciones más complejas.
+
+Ejemplo:
+
+- `head -n 10 optd_aircraft.csv | wc`
+
+### 1.3.7. Buscar ficheros
+
+Cuando se trabaja con muchos ficheros, en ordenadores que no son los habituales (clusters) y donde tiene accesos mucha gente, puede darse el caso de que archivos con los que estábamos trabajando se extravíen.
+
+En la shell contamos con la herramientas `find` que permite buscar en todos los ficheros del ordenador, filtrando por unas condiciones dadas como tamaño, formato, nombre, última fecha de modificación...etc.
+
+La sintaxis de este comando es `find [path] [coditions]`. Algunas de las condiciones más útiles que podemos utilizar con esta herramienta son:
+
+- `-type f`, `-type d`: fichero o directorio
+- `-name`: nombre del fichero, se pueden utilizar asteriscos si no se sabe como termina un nombre por ejemplo
+- `-iname`: nombre del fichero ignorando mayúsculas o minúsculas
+- `-maxdepth`: máximo nivel de subdirectorios en los que se va a realizar la búsqueda a partir del directorio actual
+- `-mindepth`: mínimo nivel de subdirectorios en los que se va a realizar la búsqueda a partir del directorio actual
+- `-perm n`: permisos del fichero de búsqueda, donde n es un número de tres cifras que indica los permisos para cada clase
+- `-size +- n`: mayor o menor tamaño que n. M para megasbytes, k para kilobytes
+- `-empty`: ficheros vacios
+- `-mmin -N`: ficheros modificados en los último N minutos
+- `-mtime -N`: ficheros modificados en los último N días
+
+Cualquiera de las condiciones anteriores puede invertirse si se coloca delante el símbolo `!`.
+
+
 ## 1.4. Ejercicios
+
+### 1.4.1. Ejercicios navegación directorios
 
 1. Create a directory “first_dir” in you home folder:
 
@@ -165,6 +255,43 @@ Muestra por consola las últimas líneas que definamos de un fichero. La sintaxi
 
 > `cd ~/first_dir`
 > `rm -r sub2`
+
+
+### 1.4.2. Ejercicios exploración / análisis ficheros
+
+1. Find top 10 files by size in your home directory including the subdirectories. Sort them by size and print the result including the size and the name of the file (hint: use find with –size and -exec ls –s parameters)
+
+2. Create a dummy file with this command : seq 15> 20lines.txt; seq 9 1 20 >> 20lines.txt; echo"20\n20" >> 20lines.txt; (check the content of file first)
+a) Sort the lines of file based on alphanumeric characters
+b) Sort the lines of file based on numeric values and eliminate the duplicates
+c) Print just duplicated lines of the file
+d) Print the line which has most repetitions
+e) Print unique lines with the number of repetitions sorted by the number of repetitions from lowest to highest
+
+3. Create another file with this command : seq 0 2 40 > 20lines2.txt
+a) Create 3rd file combining the first two files (20lines.txt and 20lines2.txt) but without duplicates
+b) Merge the first two files. Print unique lines together with the number of occurrences inside the merged file and sorted based on
+line content.
+
+4. Go to ~/Data/opentraveldata Get the line with the highest number of engines from optd_aircraft.csv by using sort.
+
+### 1.4.3. Ejercicios búsqueda ficheros
+
+1. Find all files located inside subdirectories of your home directory which have been modified in last 60min
+
+> `find . -type f -mmin -60 `
+
+2. Find all empty files inside subdirectories of your home directory which do NOT have read-write-execute permissions given to all users
+
+> `find . -mindepth 2 -type f -empty ! -perm 777`
+
+3. Expand previous command to grant these permissions using “ok” option.
+
+> `find . -mindepth 2 -type f -empty ! -perm 777 -ok chmod 777 {} \;`
+
+4. Get top 3 largest files per subdirectory inside ~/Data/
+
+> `find . -mindepth 1 -type d -exec echo {} \; -exec zsh -c "ls -lS {} | head 3" \;`
 
 # 2. Git
 
