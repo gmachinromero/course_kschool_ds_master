@@ -172,3 +172,6 @@ Muestra por consola las últimas líneas que definamos de un fichero. La sintaxi
 
 - https://towardsdatascience.com/shell-basics-every-data-scientist-should-know-3f012ef5c38c
 - https://www.datascienceatthecommandline.com/1e/index.html
+
+
+Probndooooooo
