@@ -104,7 +104,7 @@ Sí, está bien y no se trata de un error, mediante el mismo comando anterior ta
 
 Este comando permite eliminar ficheros de un directorio. La sintaxis es `rm [opt] file/dir`. Si se trabaja con directorios es necesario indicarlos mediante el comando `rm -r`.
 
-### 1.3.3. Explorar ficheros
+### 1.3.3. Exploración de ficheros
 
 **Visualizar fichero interactivo / less:**
 
@@ -124,9 +124,12 @@ Muestra por consola las últimas líneas que definamos de un fichero. La sintaxi
 
 **Contabilizar registros / wc - word count:**
 
-Muestra por consola tres datos: número de filas, palabra y bytes. La sintaxis es `wc file`.
+Muestra por consola tres datos: número de filas, palabra y bytes. La sintaxis es `wc [opt] file`. Algunas de las opciones más comunes son:
 
-### 1.3.4. Anaizando ficheros
+- `wc -c`: muestra el número de bytes del fichero
+- `wc -m`: muestra el número de caracteres
+- `wc -l`: muestra el número de lineas
+- `wc -w`: muestra el número de palabras
 
 **Ordenar ficheros / sort:**
 
@@ -140,7 +143,7 @@ Este comando permite ordenar un fichero en base a diferentes condiciones. La sin
 Las anteriores opciones pueden se pueden combinar entre sí. Adicionalmente, en ficheros con muchas columnas se pueden utilizar opciones más avanzadas para ordenar el mismo en base a un mayor número de parámetros:
 
 - `sort -t "delimiter"`: indica el delimitador del fichero
-- `sort -k M[,N]`: los campos clave para ordenar el fichero van desde la columna M hasta la N en caso de indicarse, si no hasta el final del fichero
+- `sort -k M[,N]`: los campos clave para ordenar el fichero van desde la columna M hasta la N en caso de indicarse, si no hasta el final del fichero. Índice 1.
 
 **Duplicados / uniq:**
 
@@ -153,6 +156,42 @@ Algunas de las opciones más comunes son:
 
 Si se quieren eliminar los duplicados de un fichero, se tiene que recurrir al comando `sort -u file`.
 
+### 1.3.4. Procesamiento y filtrado de ficheros
+
+**Extraer columnas / cut:**
+
+Este comando permite extraer de un fichero solo aquellas columnas con las que se vaya a trabajar. La sintaxis es `cut [opt] file`.
+
+Algunas de las opciones más comunes son:
+
+- `cut -d ["delimiter"]`: indicar el delimitador que separa las columnas, por defecto es TAB.
+- `cut -f K[-M][,N]`: indica las columnas a extraer. Índice 1.
+- `cut --output-delimiter`: indica el delimitador del fichero de salida, por defecto es el mismo que el de entrada.
+
+Ejemplo:
+
+- `cut -d "^" -f 1-3,5 --output-delimiter "," optd_aircraft.csv | head`
+
+**Concatenar horizontal / paste:**
+
+Este comando permite trasponer de forma horizontal, los registros de un fichero. La sintaxis es `paste [opt] file_1 file_2`.
+
+Algunas de las opciones más comunes son:
+
+- `paste -d ["delimiter"]`: indica el delimitador de la concatenación, po defecto es TAB. Si se indican varios se van utilizando alternativamente.
+- `paste -s`: concatena o¡los ficheros de forma hoizontal, y luego traspone los resultados.
+
+**Reemplazar caracteres / tr:**
+
+Este comando permite eliminar o reemplazar los caracteres que cumplan una condicion (set1) por otros (set2). La sintaxis es `tr [opt] set1 [set2]`. Los sets pueden ser conjuntos de caracteres 
+
+Algunas de las opciones más comunes son:
+
+- `tr -s`: reemplaza todos los caracteres iguales que sean adyacentes.
+- `tr -d`: elimina los caracteres indicados en el set1.
+- `tr -c`: conserva solo aquellos caracteres indicados en el set1.
+
+En los sets se pueden pasar como argumentos clases predefinidas de caracteres como: `[:digit:]`, `[:alpha:]`...etc.
 
 
 
@@ -202,16 +241,17 @@ La sintaxis de este comando es `find [path] [coditions]`. Algunas de las condici
 Cualquiera de las condiciones anteriores puede invertirse si se coloca delante el símbolo `!`.
 
 
+
 ## 1.4. Ejercicios
 
 ### 1.4.1. Ejercicios navegación directorios
 
-1. Create a directory “first_dir” in you home folder:
+1. Create a directory “first_dir” in you home folder
 
 > `cd ~`
 > `mkdir first_dir`
 
-2. Create an empty file “text_file.txt” inside “first_dir” directory.
+2. Create an empty file “text_file.txt” inside “first_dir” directory
 
 > `cd ~/first_dir`
 > `touch text_file.txt`
@@ -226,17 +266,17 @@ Cualquiera de las condiciones anteriores puede invertirse si se coloca delante e
 > `cd ~/first_dir`
 > `mkdir sub1 sub2 text_file`
 
-5. Copy the “text_file.txt” file into “sub1” directory.
+5. Copy the “text_file.txt” file into “sub1” directory
 
 > `cd ~/first_dir`
 > `cp text_file.txt sub1`
 
-6. Move the “text_file.txt” into sub2 under name “text_file.txt.2”.
+6. Move the “text_file.txt” into sub2 under name “text_file.txt.2”
 
 > `cd ~/first_dir`
 > `mv text_file.txt sub2/text_file.txt.2`
 
-7. Copy the whole directory “sub1” to “sub3” directory.
+7. Copy the whole directory “sub1” to “sub3” directory
 
 > `cd ~/first_dir`
 > `cp -r sub1 sub3`
@@ -261,21 +301,79 @@ Cualquiera de las condiciones anteriores puede invertirse si se coloca delante e
 
 1. Find top 10 files by size in your home directory including the subdirectories. Sort them by size and print the result including the size and the name of the file (hint: use find with –size and -exec ls –s parameters)
 
-2. Create a dummy file with this command : seq 15> 20lines.txt; seq 9 1 20 >> 20lines.txt; echo"20\n20" >> 20lines.txt; (check the content of file first)
-a) Sort the lines of file based on alphanumeric characters
-b) Sort the lines of file based on numeric values and eliminate the duplicates
-c) Print just duplicated lines of the file
-d) Print the line which has most repetitions
-e) Print unique lines with the number of repetitions sorted by the number of repetitions from lowest to highest
+> `find ~ -type f -size +10M -exec ls -sh {} \; | sort -nr | head`
 
-3. Create another file with this command : seq 0 2 40 > 20lines2.txt
-a) Create 3rd file combining the first two files (20lines.txt and 20lines2.txt) but without duplicates
-b) Merge the first two files. Print unique lines together with the number of occurrences inside the merged file and sorted based on
-line content.
+2. Create a dummy file with this command: seq 15 > 20lines.txt; seq 9 1 20 >> 20lines.txt; echo"20\n20" >> 20lines.txt; (check the content of file first)
 
-4. Go to ~/Data/opentraveldata Get the line with the highest number of engines from optd_aircraft.csv by using sort.
+- Sort the lines of file based on alphanumeric characters
 
-### 1.4.3. Ejercicios búsqueda ficheros
+> `sort -d 20lines.txt`
+
+- Sort the lines of file based on numeric values and eliminate the duplicates
+
+> `sort -nu 20lines.txt`
+
+- Print just duplicated lines of the file
+
+> `sort -n 20lines.txt | uniq –d`
+
+- Print the line which has most repetitions
+
+> `sort -n 20lines.txt | uniq -d -c | sort -nr | head -1`
+
+> `sort -n 20lines.txt | uniq -d -c | sort -n | tail -1`
+
+- Print unique lines with the number of repetitions sorted by the number of repetitions from lowest to highest
+
+> `sort -n 20lines.txt | uniq -c | sort -nr`
+
+3. Create another file with this command: seq 0 2 40 > 20lines2.txt
+
+- Create 3rd file combining the first two files (20lines.txt and 20lines2.txt) but without duplicates
+
+> `sort -nu 20lines.txt 20lines2.txt > 20files_no_dupl.txt`
+
+- Merge the first two files. Print unique lines together with the number of occurrences inside the merged file and sorted based on line content.
+
+> `sort 20lines2.txt 20lines.txt | uniq -c | sort -k 2n,2`
+
+4. Go to ~/Data/opentraveldata and get the line with the highest number of engines from optd_aircraft.csv by using sort.
+
+> `sort -t "^" -k 7nr,7 optd_aircraft.csv | head -1`
+
+### 1.4.3. Ejercicios procesamiento y filtrado de ficheros
+
+1. Change the delimiter of optd_aircraft.csv to “,”
+
+> `cat optd_aircraft.csv | tr "^“ ","`
+
+2. Check if optd_por_public.csv has repeated white spaces (hint: use tr with wc)
+
+> `wc optd_por_public.csv`
+
+> `cat optd_por_public.csv | tr -s "[:blank:]" | wc`
+
+> `Compare the results!`
+
+3. How many columns has optd_por_public.csv? (hint: use head and tr)
+
+> `head -n 1 optd_por_public.csv| tr "^" " " | wc`
+
+> `head -n 1 optd_por_public.csv| tr "^" "\n" | wc`
+
+4. Print column names of optd_por_public.csv together with their column number. (hint: use paste)
+
+> `paste <(seq 46) <(head -1 optd_por_public.csv | tr "^" "\n")`
+
+5. Use optd_airlines.csv to obtain the airline with the most flights
+
+> `cat optd_airlines.csv | cut -d "^" -f 8,14 | sort -t "^" -k 2nr,2 | head -1`
+
+6. Use optd_airlines.csv to obtain number of airlines in each alliance
+
+> `cat optd_airlines.csv| cut -d "^" -f 10 | sort| uniq -c | sort -rn | head`
+
+### 1.4.4. Ejercicios búsqueda ficheros
 
 1. Find all files located inside subdirectories of your home directory which have been modified in last 60min
 
@@ -295,7 +393,100 @@ line content.
 
 # 2. Git
 
+## 2.1. Intro
+
+Git es un software de control de versiones diseñado por Linus Torvalds, pensando en la eficiencia y la confiabilidad del mantenimiento de versiones de aplicaciones cuando éstas tienen un gran número de archivos de código fuente. Su propósito es llevar registro de los cambios en archivos de computadora y coordinar el trabajo que varias personas realizan sobre archivos compartidos.
+
+Git presenta una arquitectura distribuida, es un ejemplo de DVCS (sistema de control de versiones distribuido, por sus siglas en inglés). En lugar de tener un único espacio para todo el historial de versiones del software, como sucede de manera habitual en los sistemas de control de versiones de antaño más populares como CVS o Subversion (también conocido como SVN), en Git, la copia de trabajo del código de cada desarrollador es también un repositorio que puede albergar el historial completo de todos los cambios
+
+Fundamentalmente, un proyecto Git se estructura en tres áreas:
+
+- Working directory: es donde se alojan todos nuestros ficheros, y el lugar donde se trabaja constantemente.
+- Staging area: es donde se alojan los ficheros que han sido modificados, y que aceptamos para que vayan en una futura revisión.
+- local/remote repo: es donde se almacena la revisión completa, y puede ser local y/o remoto.
+
+<img src="_images\git_structure.png" alt="Drawing" style="width: 400px;"/>
+
+## 2.2. Terminología
+
+A continuación se listan los términos que se utilizan con mayor frecuencia dentro de Git, y su dfeinición:
+
+- Repositorio: todo directorio que está siendo monitorizado por Git, es decir, tiene un historial de todas las modificaciones que se van registrando en cada uno de los componentes de ese directorio.
+- Commit: cada uno de los cambios registrado en el historial de un repositorio.
+- Master: rama principal del proyecto
+- Branch: ramificaciones o bifurcaciones del proyecto master donde se trabajan funcionalidades nuevas de forma aislada. De este modo se pueden testear modificaciones en el código, sin comprometer el resto del proyecto.
+- Fork: es un proyecto diferente que se crea a partir de otro.
+
+## 2.3. Comandos
+
+### 2.3.1. Congifurar Git
+
+Cada vez que actualicemos nuestro código a una nueva versión en el repositorio, aparecerá registrado con estos datos que hemos configurado. De esta forma, cuando subamos los cambios al repositorio remoto, cada revisión del código irá registrada al nombre del programador que ha efectuado los cambios.
+
+Para configurar nuestro usuario, basta con ejecutar los siguientes dos comandos:
+
+- `git config --global user.name "user"`
+- `git config --global user.email "user@email.com"`
+
+También se puede viausalizar a través del terminal, la configuración actual de Git mediante el comando `git config --list`.
+
+### 2.3.2. Comandos asociados a repos
+
+**Crear un repositorio / git init:**
+
+Este comando convierte una directorio local, en un repo de Git, y lo prepara para empezar a trabajar bajo este marco de trabajo. Para convertir un directorio en un repo se ejecuta el comando `git init` dentro del directorio que queremos transformar.
+
+Mediante este comando lo que en verdad ocurre es que se crea un directorio denominado *.git*, donde se documenta todo el historial de los cambios. Si se elimanara este directorio, la carpeta dejaría de ser un repo.
+
+En el caso de que queramos tener archivos en nuestro directorio que no se encuentren en el repositorio, se puede crear un archivo que se llame *.gitignore* donde alojaremos el nombre (permite utilizar *wildcards*) de los ficheros que no queramos que sean públicos.
+
+**Añadir fichero al staging area / git add:**
+
+Este comando añade los ficheros que no estén trackeados, al staging area. La sintaxis de este comando es `git add [file]`.
+
+**Eliminar fichero del staging area / git rm:**
+
+Este comando permite eliminar fucheros trackeados del staging area. La sintaxis de este comando es `git rm .cached file`
+
+**Añadir ficher al repo / git commit:**
+
+Una vez los ficheros están trackeados en el staging area, podemos enviarlos al repo mediante el comando `git commit`.
+
+Una buena práctica a la hora de realizar un commit es incluír un comentario en el que se indique la naturaleza, motivación y alcance del mismo. Para ello se puede utilizar el comando `git commit -m ["comment"]`.
+
+**Sincronizar nube con repo local / git push:**
+
+Mediante este comando se puede envíar realizar una copia del repo local en la nube, de este modo, si otras personas estám colaborando en el mismo proyecto, podrán descargar en sus repos locales las modificaciones.
+
+Para subir un repo local a uno en la nube, se ejecuta el comando `git push origin master`.
+
+**Clonar un repo / git clone:**
+
+Este comando permite clonar un repo que se encuentre en Git. Una vez se tenga el repo en local se podrá empezar a trabajar con el. Este comando se utiliza cuando se quiere descargar un repo por primera vez.
+
+Para clonar un repo se puede utilizar el comando `git clone [url]`.
+
+**Sincronizar repo local con la nube / git pull:**
+
+Mediante este comando podemos descargar las modificaciones que hayan tenido lugar en un repo en la nube, y sincronizar de este modo nuestro repo local.
+
+Para alinear el repo local con las modificaciones de la nube, se ejecuta el comando `git pull origin master`.
+
+**Analizar diferencias de un repo / git diff:**
+
+Este comando permite visualizar las diferencias que existen entre un fichero que se encuentra en el working area y que ha sido modificado, frente a la versión alojada en el repo.
+
+Para utilizar esta función basta con ejecutar `git diff` en el repo en cuestión.
+
+**Histórico del repo / git log:**
+
+Mediante el comando `git log` se puede obtener el histórico de modificaciones asociadas a un repositorio.
+
 # 3. Bibliografía
 
+- KSchool Data Science Master Ed. 23.
 - https://towardsdatascience.com/shell-basics-every-data-scientist-should-know-3f012ef5c38c
 - https://www.datascienceatthecommandline.com/1e/index.html
+- https://es.wikipedia.org/wiki/Git
+- https://www.atlassian.com/es/git/tutorials/what-is-git
+- https://www.git-scm.com/doc
