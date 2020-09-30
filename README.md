@@ -19,3 +19,12 @@ Los temas cubiertos en el master son:
 - 06_deep_learning
 - 07_R
 - 08_big_data_solutions
+
+## 3. Stack
+
+Aunque este punto seguramente sufra modificaciones según vaya decubriendo nuevas herramientas, os dejo un listado del stack que utilizo en mi día a día:
+
+- Línea de comandos: Windows Terminal integrado con Ubuntu y Git Bash
+- Modificar/explorar ficheros planos (txt, md, json...etc): Visual Studio Code
+- Python: Jupyter Lab
+

@@ -4,28 +4,40 @@
 
 Aunque a primera vista podría parecer que esta herramienta está un poco desfasada, y que no habría necesidad hoy en día de utilizar una aplicación con una interfaz gráfica tan arcaica y obsoleta, lo cierto es que tener unos conocimientos básicos de línea de comandos puede ser terriblemente útil en las tareas diarias de un data scientist.
 
-La filosofía que subyace detrás de la línea de comandos es la misma que la de UNIX, la filosofía de las herramientas simples, es decir, cada herramienta puede realizar una única tarea pero con un grado de eficiencia muy alto. Por lo que concatenando de la manera correcta una serie de ordenes simples, se pueden llevar a cabo tareas complejas de forma muy eficiente.
+La filosofía que subyace detrás de la línea de comandos es la misma que la de UNIX, la filosofía de las herramientas simples, es decir, cada herramienta puede realizar una única tarea pero con un grado de eficiencia muy elevado. Por lo que concatenando de la manera correcta una serie de ordenes simples, se pueden llevar a cabo tareas complejas de forma muy eficaz.
 
-Otro motivo por el que puede ser interesante tener conocimientos de shell a parte de su efectividad, es que cuando se trabaja con grandes volúmenes de datos empieza a ser necesario necesario contar con capacidades de computación superiores y esto solo es posible conectándose a un grupo de servidores o clúster. Pues bien, lo más seguro es que un cluster no tenga una GUI (graphical user interface) habilitada, y la comunicación sea exclusivamente a través de una shell.
+Otro motivo por el que puede ser interesante tener conocimientos de shell a parte de su efectividad, es que cuando se trabaja con grandes volúmenes de datos empieza a ser necesario necesario contar con capacidades de computación superiores y esto solo es posible a través de un grupo de servidores o clúster. Pues bien, lo más seguro es que un cluster no tenga una GUI (graphical user interface) habilitada, y la comunicación sea exclusivamente a través de la línea de comandos (¡que seguramente será Linux!)
+
+La línea de comandos tiene muchas ventajas que realmente pueden mejorar la eficiencia y produtividad de los profesionales que trabajan con datos, algunas de ellas se listan a continuación:
+
+- Ágil: la primera ventaja de la línea de comandos es que te permite ser ágil. La ciencia de datos tiene una naturaleza muy interactiva y exploratoria, y el entorno en el que se trabaja debe permitirlo.
+
+- Extensible: la línea de comandos se integra bien con otras tecnologías. Independientemente de la tecnología que incluya actualmente su flujo de trabajo de ciencia de datos (ya sea R, Python o Excel), la línea de comandos es una herramienta adicional que amplifica las tecnologías que está empleando actualmente.
+
+- Escalable: al realizase todo mediante comandos y sin una GUI de por medio, el código puede ser reutilizado, compartido...etc, y por lo tanto escalarse a otras situaciones similares.
+
+- Creciente: la comunidad de código abierto genera nuevas herramientas de línea de comandos gratuitas y de alta calidad que podemos usar para la ciencia de datos.
+
+- Ubicua: debido a que la línea de comandos se encuentra en cualquier sistema operativo similar a Unix, incluidos Ubuntu Linux y macOS, se puede encontrar en numerosos ordenadores, adicionalmente estudios revelan que el 95% de los superordenadores trabajan bajo la filosofía Unix.
 
 ## 1.2. Terminología
 
 La arquitectura de cualquier sistema UNIX o basado en el, está definido más o menos en cuatro capas. A continuación se listan en orden descendente:
 
-- Línea de comandos: Herramientas paa escribir los comandos.
+- Línea de comandos: Herramientas para escribir los comandos.
 - Terminal: Herramienta donde se escriben los comandos. Una vez introducidos en la terminal, ésta los envía a la shell.
 - Shell: Programa que interpreta los comandos enviados por la terminal.
-- Sistema operativo
+- Sistema operativo: Linux, MacOS ... etc
 
 ## 1.3. Comandos
 
-En los siguientes apartados se explican por temáticas los comandos que pueden ser de mayor utilidad a la hora de trabajar con la línea de comandos.
+En los siguientes apartados se agrupan por temáticas los comandos que pueden resultar de mayor utilidad a la hora de trabajar con la línea de comandos.
 
-Se incluyen en este apartado algunos comandos que pueden ser de ayuda para saber más acerca de otros comandos:
+A continuación se indican algunos comandos que pueden ser de ayuda para obtener más información acerca de otros comandos:
 
-- `man tool`: muestra el manual de la herramientas en cuestión, no todas las herramientas tienen manual.
-- `tool --help`: muesra ayuda sobre la herramienta.
-- `type tool`: indica información sobre la herramienta, si es un alias de otra herramienta o donde se aloja.
+- `man [tool]`: muestra el manual de la herramientas en cuestión, no todas las herramientas tienen manual.
+- `[tool] --help`: muesra ayuda sobre la herramienta.
+- `type [tool]`: indica información sobre la herramienta, si es un alias de otra herramienta, o donde se aloja.
 
 ### 1.3.1. Navegación por directorios
 
@@ -39,7 +51,7 @@ La ruta del *home* puede ser definida con la estructura indicada en el parrafo a
 
 > *Para escribir la virgulilla en Windows: alt gr + 4 + space.*
 
-Para saber en que directorio nos encontramos se escribe `pwd` en la la shell.
+Para saber en que directorio nos encontramos se ejecuta `pwd` en la línea de comandos.
 
 **Cambiar de directorio / cd - change directory:**
 
@@ -63,15 +75,27 @@ Para listar el contenido de un directorio se escribe el comando dentro del mismo
 
 **Modificar permisos / chmod - change mode:**
 
-Mediante este comando se pueden modificar los permisos de lectura, escritura y ejecución de los ficheros, teniendo en cuenta si la clase es usuario, grupo u otro.
+Mediante este comando se pueden modificar los permisos de lectura, escritura y ejecución de los ficheros, teniendo en cuenta también si la clase es usuario, grupo u otro.
 
-El comando a utilizar es `chmod [u+rwx],[g+rwx],[o+rwx] file_name`. El símbolo `+` se sustituye por `-` si lo que se quiere es eliminar permisos de un tipo de usuario.
+Clases:
+
+- u: User
+- g: Group
+- o: Other
+
+Permisos:
+
+- r: Read
+- w: Write
+- x: eXecute
+
+La sintaxis del comando es `chmod [u+rwx],[g+rwx],[o+rwx] file_name`. El símbolo `+` se sustituye por `-` si lo que se quiere es eliminar permisos de una clase.
 
 Existe una forma abreviada de modificar los permisos de un fichero que se indica mediante un número de tres cifras. Cada crifra atiende respectivamente a las clases: usuario, grupo y otros; y el valor de cada cifra es la suma de los diferentes permisos que se tienen dentro de una clase.
 
-- Lectura: 4
-- Escritura: 2
-- Ejecución: 1
+- r: 4
+- w: 2
+- x: 1
 
 Por ejemplo, si se quiere indicar que para un fichero el usuario va a tener permisos de lectura, escritura y ejecución (rwx), y que tanto las clases de grupo y otros van a tener permisos de lectura unicamente (r), se indicaría con el comando `chmod 744`.
 
@@ -81,7 +105,7 @@ Mediante este comando se pueden crear directorios/subdirectorios en la ruta en l
 
 Algunos casos de usos interesantes son:
 
-- `mkdir dir_name_1] dir_name_2`: crear diferentes directorios a la vez, todos alojados en el directorio padre.
+- `mkdir dir_name_1 dir_name_2`: crear diferentes directorios a la vez, todos alojados en el directorio padre.
 - `mkdir -p dir_name_1/dir_name_2`: crea un directorio 1, y el resto los va anidando.
 
 **Crear fichero / touch - make directory:**
@@ -90,7 +114,7 @@ Este comando permite crear un fichero en blanco, o si ya existe, modificar su fe
 
 **Copiar ficheros y directorios / cp - copy:**
 
-Este comando permite copiar ficheros/directorios de un lugar a otro. La sintaxis es `cp [opt] org_source dest_source`. Si se trabaja con directorios es necesario indicarlos mediante el comando `cp -r`.
+Este comando permite copiar ficheros/directorios de un lugar a otro. La sintaxis es `cp [opt] org_source dest_source`. Si se trabaja con directorios es necesario indicarlo mediante el comando `cp -r`.
 
 **Mover ficheros y directorios / mv - move:**
 
@@ -98,11 +122,11 @@ Este comando permite mover ficheros/directorios de un lugar a otro. La sintaxis 
 
 **Renombrar ficheros y directorios / mv - move:**
 
-Sí, está bien y no se trata de un error, mediante el mismo comando anterior también se pueden renombrar los ficheros y directorios. En verdad lo que sea realiza en este caso es un mover un fichero de un directorio a ese mismo directorio, pero con otro nombre. La sintaxis es `mv (opt) [org_name] [dest_name]`.
+Sí, está bien y no se trata de un error, mediante el mismo comando anterior también se pueden renombrar los ficheros y directorios. En verdad lo que sea realiza en este caso es mover un fichero de un directorio, a ese mismo directorio, pero con otro nombre. La sintaxis es `mv (opt) org_name dest_name`.
 
 **Eliminar ficheros y directorios / rm - remove:**
 
-Este comando permite eliminar ficheros de un directorio. La sintaxis es `rm [opt] file/dir`. Si se trabaja con directorios es necesario indicarlos mediante el comando `rm -r`.
+Este comando permite eliminar ficheros de un directorio. La sintaxis es `rm [opt] file/dir`. Si se trabaja con directorios es necesario indicarlo mediante el comando `rm -r`.
 
 ### 1.3.3. Exploración de ficheros
 
@@ -116,20 +140,20 @@ Muestra por consola el contenido completo de un fichero, hay que tener cuidado s
 
 **Visualizar las primeras K líneas de un fichero / head:**
 
-Muestra por consola las primeras líneas que definamos de un fichero. La sintaxis es `head -n K file`.
+Muestra por consola las primeras K líneas que se definan de un fichero. La sintaxis es `head -n K file`.
 
 **Visualizar las últimas K líneas de un fichero / tail:**
 
-Muestra por consola las últimas líneas que definamos de un fichero. La sintaxis es `tail -n K file`.
+Muestra por consola las últimas K líneas que se definan de un fichero. La sintaxis es `tail -n K file`.
 
 **Contabilizar registros / wc - word count:**
 
 Muestra por consola tres datos: número de filas, palabra y bytes. La sintaxis es `wc [opt] file`. Algunas de las opciones más comunes son:
 
-- `wc -c`: muestra el número de bytes del fichero
-- `wc -m`: muestra el número de caracteres
-- `wc -l`: muestra el número de lineas
-- `wc -w`: muestra el número de palabras
+- `wc -c`: muestra solo el número de bytes del fichero
+- `wc -m`: muestra solo el número de caracteres
+- `wc -l`: muestra solo el número de lineas
+- `wc -w`: muestra solo el número de palabras
 
 **Ordenar ficheros / sort:**
 
@@ -140,27 +164,27 @@ Este comando permite ordenar un fichero en base a diferentes condiciones. La sin
 - `sort -r`: inverso
 - `sort -f`: no se tienen en cuenta mayúsculas y minúsculas
 
-Las anteriores opciones pueden se pueden combinar entre sí. Adicionalmente, en ficheros con muchas columnas se pueden utilizar opciones más avanzadas para ordenar el mismo en base a un mayor número de parámetros:
+Las anteriores opciones se pueden combinar entre sí. Adicionalmente, en ficheros con muchas columnas se pueden utilizar opciones más avanzadas para ordenar el mismo en base a un mayor número de parámetros:
 
 - `sort -t "delimiter"`: indica el delimitador del fichero
 - `sort -k M[,N]`: los campos clave para ordenar el fichero van desde la columna M hasta la N en caso de indicarse, si no hasta el final del fichero. Índice 1.
 
 **Duplicados / uniq:**
 
-Este comando permite analizar las duplicidades dentro de un fichero, en función de las opciones de la herramienta se pueden obtener diferentes resultados. Para que este comando funcione correctamente, el fichero debe estar ordenado. La sintaxis es `uniq [opt] file`.
+Este comando permite analizar las duplicidades dentro de un fichero, en función de las opciones de la herramienta se pueden obtener diferentes resultados. Para que este comando funcione correctamente, el fichero debe estar ordenado previament (*sort*). La sintaxis es `uniq [opt] file`.
 
 Algunas de las opciones más comunes son:
 
 - `uniq -c`: añade un prefijo a las líneas con el número de ocurrencias
 - `uniq -d`: solo muestra aquellos registros duplicados
 
-Si se quieren eliminar los duplicados de un fichero, se tiene que recurrir al comando `sort -u file`.
+Si se quieren eliminar los duplicados de un fichero y mostrar por pantalla registros únicos, se debe recurrir al comando `sort -u file`.
 
 ### 1.3.4. Procesamiento y filtrado de ficheros
 
 **Extraer columnas / cut:**
 
-Este comando permite extraer de un fichero solo aquellas columnas con las que se vaya a trabajar. La sintaxis es `cut [opt] file`.
+Este comando permite extraer de un fichero aquellas columnas con las que se vaya a trabajar posteriormente. La sintaxis es `cut [opt] file`.
 
 Algunas de las opciones más comunes son:
 
@@ -174,12 +198,12 @@ Ejemplo:
 
 **Concatenar horizontal / paste:**
 
-Este comando permite trasponer de forma horizontal, los registros de un fichero. La sintaxis es `paste [opt] file_1 file_2`.
+Este comando permite concatenar de forma horizontal, los registros de un fichero. La sintaxis es `paste [opt] file_1 file_2`.
 
 Algunas de las opciones más comunes son:
 
-- `paste -d ["delimiter"]`: indica el delimitador de la concatenación, po defecto es TAB. Si se indican varios se van utilizando alternativamente.
-- `paste -s`: concatena o¡los ficheros de forma hoizontal, y luego traspone los resultados.
+- `paste -d ["delimiter"]`: indica el delimitador de la concatenación. Por defecto es TAB, si se indican varios se van utilizando alternativamente.
+- `paste -s`: concatena los ficheros de forma hoizontal, y luego traspone los resultados.
 
 **Reemplazar caracteres / tr:**
 
@@ -193,15 +217,13 @@ Algunas de las opciones más comunes son:
 
 En los sets se pueden pasar como argumentos clases predefinidas de caracteres como: `[:digit:]`, `[:alpha:]`...etc.
 
-
-
 ### 1.3.5. Entradas, salidas y redirecciones
 
 **Redirecciones:**
 
-De forma predeterminada, el último comando ejecutado en la shell es mostrado como salida en la terminal. Esta salida se puede guardar en un fichero mediante el comando`>`. Esto se denomina redirección.
+De forma predeterminada, el último comando ejecutado en la shell es mostrado como salida en la terminal. Esta salida se puede guardar en un fichero mediante el comando `>`. Esto se denomina redirección.
 
-Si la información se redirecciona a un fichero que no existe este es creado automáticamente, sin embargo si ya existía, se sobreescribe. Si lo que se quiere es adjuntar información adicional a un fichero existente, se puede llevar a cabo mediante el comando `>>`.
+Si la información se redirecciona a un fichero que no existe este es creado automáticamente, sin embargo si ya existía, se sobreescribe. Si lo que se quiere es añadir (*append*) información adicional a un fichero existente, se puede llevar a cabo mediante el comando `>>`.
 
 Ejemplo:
 
@@ -211,9 +233,9 @@ Ejemplo:
 
 ### 1.3.6. Pipeline
 
-Como se indica al principio de este notebook, las herramientas de UNIX están pensadas para realizar una única opción pero con una eficiencia muy alta, ¿pero que ocurre cuando necesitamos realizar tareas más complejas?
+Como se indicaba al principio de este notebook, las herramientas de UNIX están pensadas para realizar una única tarea de forma eficiente, ¿pero que ocurre cuando necesitamos realizar tareas más complejas?
 
-En la shell existe un comando denominado pipeline `|` que concatena herramientas más sencillas, permitiendo llevar a cabo operaciones más complejas.
+Existe un comando denominado pipeline `|` que perimite concatenar las funcionalidades de cada herramienta, permitiendo llevar a cabo operaciones más complejas.
 
 Ejemplo:
 
@@ -221,14 +243,14 @@ Ejemplo:
 
 ### 1.3.7. Buscar ficheros
 
-Cuando se trabaja con muchos ficheros, en ordenadores que no son los habituales (clusters) y donde tiene accesos mucha gente, puede darse el caso de que archivos con los que estábamos trabajando se extravíen.
+Cuando se trabaja con muchos ficheros, en ordenadores que no son los habituales (clusters), y donde tiene accesos mucha gente, puede darse el caso de que archivos con los que estábamos trabajando se extravíen.
 
 En la shell contamos con la herramientas `find` que permite buscar en todos los ficheros del ordenador, filtrando por unas condiciones dadas como tamaño, formato, nombre, última fecha de modificación...etc.
 
 La sintaxis de este comando es `find [path] [coditions]`. Algunas de las condiciones más útiles que podemos utilizar con esta herramienta son:
 
 - `-type f`, `-type d`: fichero o directorio
-- `-name`: nombre del fichero, se pueden utilizar asteriscos si no se sabe como termina un nombre por ejemplo
+- `-name`: nombre del fichero, permite la utilización de *wildcards*
 - `-iname`: nombre del fichero ignorando mayúsculas o minúsculas
 - `-maxdepth`: máximo nivel de subdirectorios en los que se va a realizar la búsqueda a partir del directorio actual
 - `-mindepth`: mínimo nivel de subdirectorios en los que se va a realizar la búsqueda a partir del directorio actual
@@ -239,8 +261,6 @@ La sintaxis de este comando es `find [path] [coditions]`. Algunas de las condici
 - `-mtime -N`: ficheros modificados en los último N días
 
 Cualquiera de las condiciones anteriores puede invertirse si se coloca delante el símbolo `!`.
-
-
 
 ## 1.4. Ejercicios
 
@@ -395,11 +415,11 @@ Cualquiera de las condiciones anteriores puede invertirse si se coloca delante e
 
 ## 2.1. Intro
 
-Git es un software de control de versiones diseñado por Linus Torvalds, pensando en la eficiencia y la confiabilidad del mantenimiento de versiones de aplicaciones cuando éstas tienen un gran número de archivos de código fuente. Su propósito es llevar registro de los cambios en archivos de computadora y coordinar el trabajo que varias personas realizan sobre archivos compartidos.
+Git es un software de control de versiones diseñado por Linus Torvalds, pensando en la eficiencia y la confiabilidad del mantenimiento de versiones de aplicaciones cuando éstas tienen un gran número de archivos de código fuente. Su propósito es llevar un registro de los cambios en los archivos del ordenador, y coordinar el trabajo que varias personas realizan sobre archivos compartidos.
 
-Git presenta una arquitectura distribuida, es un ejemplo de DVCS (sistema de control de versiones distribuido, por sus siglas en inglés). En lugar de tener un único espacio para todo el historial de versiones del software, como sucede de manera habitual en los sistemas de control de versiones de antaño más populares como CVS o Subversion (también conocido como SVN), en Git, la copia de trabajo del código de cada desarrollador es también un repositorio que puede albergar el historial completo de todos los cambios
+Git presenta una arquitectura distribuida, es un ejemplo de DVCS (sistema de control de versiones distribuido, por sus siglas en inglés). En lugar de tener un único espacio para todo el historial de versiones del software, en Git, la copia de trabajo del código de cada desarrollador es también un repositorio que puede albergar el historial completo de todos los cambios
 
-Fundamentalmente, un proyecto Git se estructura en tres áreas:
+Fundamentalmente, un proyecto en Git se estructura en tres áreas:
 
 - Working directory: es donde se alojan todos nuestros ficheros, y el lugar donde se trabaja constantemente.
 - Staging area: es donde se alojan los ficheros que han sido modificados, y que aceptamos para que vayan en una futura revisión.
@@ -409,7 +429,7 @@ Fundamentalmente, un proyecto Git se estructura en tres áreas:
 
 ## 2.2. Terminología
 
-A continuación se listan los términos que se utilizan con mayor frecuencia dentro de Git, y su dfeinición:
+A continuación se listan los términos que se utilizan con mayor frecuencia dentro de Git, y su definición:
 
 - Repositorio: todo directorio que está siendo monitorizado por Git, es decir, tiene un historial de todas las modificaciones que se van registrando en cada uno de los componentes de ese directorio.
 - Commit: cada uno de los cambios registrado en el historial de un repositorio.
@@ -428,7 +448,7 @@ Para configurar nuestro usuario, basta con ejecutar los siguientes dos comandos:
 - `git config --global user.name "user"`
 - `git config --global user.email "user@email.com"`
 
-También se puede viausalizar a través del terminal, la configuración actual de Git mediante el comando `git config --list`.
+También se puede visualizar a través del terminal la configuración actual de Git mediante el comando `git config --list`. Existen variantes para obtener información más detallada como `git config --list --show-origin`.
 
 ### 2.3.2. Comandos asociados a repos
 
@@ -436,9 +456,9 @@ También se puede viausalizar a través del terminal, la configuración actual d
 
 Este comando convierte una directorio local, en un repo de Git, y lo prepara para empezar a trabajar bajo este marco de trabajo. Para convertir un directorio en un repo se ejecuta el comando `git init` dentro del directorio que queremos transformar.
 
-Mediante este comando lo que en verdad ocurre es que se crea un directorio denominado *.git*, donde se documenta todo el historial de los cambios. Si se elimanara este directorio, la carpeta dejaría de ser un repo.
+Al ejecutar este comando lo que en verdad ocurre es que se crea un directorio denominado *.git*, donde se documenta todo el historial de los cambios. Si se elimanara este directorio, la carpeta dejaría de ser un repo.
 
-En el caso de que queramos tener archivos en nuestro directorio que no se encuentren en el repositorio, se puede crear un archivo que se llame *.gitignore* donde alojaremos el nombre (permite utilizar *wildcards*) de los ficheros que no queramos que sean públicos.
+En el caso de que se quiera tener archivos en nuestro directorio que no se encuentren en el repositorio, se puede crear un archivo que se llame *.gitignore* donde se indique el nombre (permite utilizar *wildcards*) de los ficheros que no queramos que sean públicos.
 
 **Añadir fichero al staging area / git add:**
 
@@ -456,13 +476,13 @@ Una buena práctica a la hora de realizar un commit es incluír un comentario en
 
 **Sincronizar nube con repo local / git push:**
 
-Mediante este comando se puede envíar realizar una copia del repo local en la nube, de este modo, si otras personas estám colaborando en el mismo proyecto, podrán descargar en sus repos locales las modificaciones.
+Mediante este comando se puede realizar una copia del repo local en la nube, de este modo, si otras personas están colaborando en el mismo proyecto, podrán descargar en sus repos locales las modificaciones.
 
-Para subir un repo local a uno en la nube, se ejecuta el comando `git push origin master`.
+Para remitir los cambios de un repo local a la nube, se ejecuta el comando `git push origin master`.
 
 **Clonar un repo / git clone:**
 
-Este comando permite clonar un repo que se encuentre en Git. Una vez se tenga el repo en local se podrá empezar a trabajar con el. Este comando se utiliza cuando se quiere descargar un repo por primera vez.
+Este comando permite clonar un repo que se encuentre en la nube o en un repo externo, en nuestra máquina. Una vez se tenga el repo en local se podrá empezar a trabajar con el. Este comando se utiliza cuando se quiere descargar un repo por primera vez.
 
 Para clonar un repo se puede utilizar el comando `git clone [url]`.
 
