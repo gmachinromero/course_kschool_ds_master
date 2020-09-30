@@ -6,7 +6,6 @@ En este repositorio podrás encontrar los ficheros y notebooks que voy elaborand
 
 Estos notebooks están pensados tanto para todo aquel que se inicia en el mundo del data science, como para aquellas personas que ya tienen algunos conocimientos y buscan documentación estructurada a la que recurrir en caso de consultas.
 
-Prueba.
 
 ## 2. Temario
 
