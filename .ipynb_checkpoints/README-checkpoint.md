@@ -24,7 +24,7 @@ Los temas cubiertos en el master son:
 
 Aunque este punto seguramente sufra modificaciones según vaya decubriendo nuevas herramientas, os dejo un listado del stack que utilizo en mi día a día:
 
-- Línea de comandos: Windows Terminal integrado con Ubuntu y Git Bash
-- Modificar/explorar ficheros planos (txt, md, json...etc): Visual Studio Code
-- Python: Jupyter Lab
+- Línea de comandos: Windows Terminal (WSL) integrado con Ubuntu y Git Bash
+- Modificar/explorar ficheros planos (.txt, .md, .json...etc): Visual Studio Code
+- Python: Jupyter Lab (notebooks)
 
