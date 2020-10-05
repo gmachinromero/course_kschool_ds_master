@@ -27,4 +27,4 @@ Aunque este punto seguramente sufra modificaciones según vaya decubriendo nueva
 - Línea de comandos: Windows Terminal (WSL) integrado con Ubuntu y Git Bash
 - Modificar/explorar ficheros planos (.txt, .md, .json...etc): Visual Studio Code
 - Python: Jupyter Lab (notebooks)
-
+- R: RStudio
