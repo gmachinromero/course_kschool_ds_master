@@ -32,4 +32,4 @@ Aunque este punto seguramente sufra modificaciones según vaya decubriendo nueva
 
 ## 4. Disclaimer
 
-Aquellas imágenes o textos que no me pertenezcan se utilizarán con fines divulgativos, nunca con ánimo de lucro, y serán adecuadamente citados en el post correspondiente mediante un apartado bibliográfico.
+El objetivo de estos notebooks es meramente de carácter personal y con el fin de crear una base de conocimiento, donde plasmar ciertos temas y poder acudir a ella como documentación de referencia. Aquellas imágenes o textos que no me pertenezcan se utilizarán con fines divulgativos, nunca con ánimo de lucro, y serán adecuadamente citados en el notebook correspondiente mediante un apartado bibliográfico.
