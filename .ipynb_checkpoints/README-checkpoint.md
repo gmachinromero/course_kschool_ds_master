@@ -12,13 +12,14 @@ Estos notebooks están pensados tanto para todo aquel que se inicia en el mundo 
 Los temas cubiertos en el master son:
 
 - 01_shell_git
-- 02_python_algebra_estadistica
-- 03_python_data_science
-- 04_visualizacion_datos
-- 05_machine_learning
-- 06_deep_learning
-- 07_R
-- 08_big_data_solutions
+- 02_python_intro
+- 03_python_algebra_estadistica
+- 04_python_data_science
+- 05_visualizacion_datos
+- 06_machine_learning
+- 07_deep_learning
+- 08_R
+- 09_big_data_solutions
 
 ## 3. Stack
 
@@ -27,4 +28,8 @@ Aunque este punto seguramente sufra modificaciones según vaya decubriendo nueva
 - Línea de comandos: Windows Terminal (WSL) integrado con Ubuntu y Git Bash
 - Modificar/explorar ficheros planos (.txt, .md, .json...etc): Visual Studio Code
 - Python: Jupyter Lab (notebooks)
+- R: RStudio
 
+## 4. Disclaimer
+
+Aquellas imágenes o textos que no me pertenezcan se utilizarán con fines divulgativos, nunca con ánimo de lucro, y serán adecuadamente citados en el post correspondiente mediante un apartado bibliográfico.

@@ -32,4 +32,4 @@ Aunque este punto seguramente sufra modificaciones según vaya decubriendo nueva
 
 ## 4. Disclaimer
 
-Aquellas imágenes o vídeos que no me pertenezcan se utilizarán con fines divulgativos, nunca con ánimo de lucro, y serán adecuadamente citados en el post correspondiente mediante un apartado bibliográfico.
+Aquellas imágenes o textos que no me pertenezcan se utilizarán con fines divulgativos, nunca con ánimo de lucro, y serán adecuadamente citados en el post correspondiente mediante un apartado bibliográfico.
