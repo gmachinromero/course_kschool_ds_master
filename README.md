@@ -29,3 +29,7 @@ Aunque este punto seguramente sufra modificaciones según vaya decubriendo nueva
 - Modificar/explorar ficheros planos (.txt, .md, .json...etc): Visual Studio Code
 - Python: Jupyter Lab (notebooks)
 - R: RStudio
+
+## 4. Disclaimer
+
+Aquellas imágenes o vídeos que no me pertenezcan se utilizarán con fines divulgativos, nunca con ánimo de lucro, y serán adecuadamente citados en el post correspondiente mediante un apartado bibliográfico.
