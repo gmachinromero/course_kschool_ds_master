@@ -1,0 +1,92 @@
+id,pregunta
+"[1],""Webview mailto in kotlin, how?"""
+[2],This is probably not a problem with npm. There is likely additional logging output above. Exit status 1
+[3],Issue with replacing a value of cell with returned variable - Incorrect formatting?
+[4],Docker desktop eats all memory and crashes
+[5],Login page with 3 input boxes for username (3 characters per box)
+[6],knex / postgresql updating a foreign key to null
+[7],Create a bmp file 8 bits per pixel javascript
+[8],pgAdmin on OpenShift using RedHat base image
+[9],Ember Octane (3.22+) why use {{on 'click' this.function}} instead of onclick={{this.function}}
+[10],2D linear interpolation in R with non-monotonically spaced values
+[11],Flutter render PDF file
+[12],HTTP Status 500: Servlet.init() for servlet [br.com.project.ApplicationConfig] threw exception
+[13],Flutter Webview inside a Transform renders differently on Android and iOS
+[14],UI freezes on API call in useEffect React Native
+[15],CsvHelper parsing fails for tab delimitted record
+descripcion,id,pregunta
+"
+            I'm having issues getting the AT+CUSD command work reliably.
+When trying to get my balance with AT+CUSD=1,""#123#"",15 I get back OK but no response from the provider (it's the code mentioned ...
+        ",[1],Issues with AT+CUSD
+"
+            I created a plugin using a simple form. How to make this form look like a DIVI form?
+Which classes / styles are to be applied?
+My form:
+<form method=""post"">
+    <label for=""...
+        ",[2],Wordpress: How to style my form in DIVI style
+"
+            I have an issue with filtering a large dataset, which I believe is because of an inefficient join. What I'm trying to do is the following:
+Dataset info contains a lot of user data, identified by a ...
+        ",[3],Efficient filtering of a large dataset in Spark based on other dataset
+"
+            Im doing a Java course and in one exercise I have to create three ArrayLists, ask the user to fill the first two with Integers, and then compare both ArrayLists.
+The values that don´t repeat are added ...
+        ",[4],Can`t compare ArrayList values in Java
+"
+            I want to make a list of the largest two and smallest two items in a list of dictionaries based on a dictiony key in this case 'price' - as shown below in the code - using  the heapq module two ...
+        ",[5],make a list of the largest two and smallest two items of the same collection using the heapq module two functions nlargest() and nsmallest()
+"
+            I have a table with 3 columns. I want to create a date column for each id from its start_date till end_date, if no end_date then till today.
+How can I active this in Postgres? Thanks!
+Sample table:
++--...
+        ",[6],Generating dates for each id
+"
+            I am new into sql , I have a table like this:
+Below is the query :
+select gc.GC_Name, dt.GC_SectorType,dt.ageing,
+sum(cast(dt.[Brokerage Debtors] as numeric)) as Brokerage_Amt,dt.divisionalofficename
+...
+        ",[7],How to create pivot using sql
+"
+            Say I have a time series expanding multiple years at daily intervals, with datetime index (yyyy-mm-dd). I'd like to calculate the Julian day (or day of year from 1 to 365) corresponding to maximum, ...
+        ",[8],"How to group by year, and return the day of year (index) for max, median, or quantile"
+"
+            My source, ""bookTest.Rnw"":
+\documentclass[{tufte-book}
+
+\begin{document}
+<<>>=
+1+1
+@
+
+$x + 1$
+\end{document}
+
+My engine, ""knitrX.engine"":
+#!/bin/bash
+export PATH=$PATH:/...
+        ",[9],knitr with xelatex in TexShop engine
+"
+            I have a Rectangle class that finds the area of a Rectangle using top-left and bottom-right coordinates. I'm having trouble writing up a test function to test the code and verify it works.
+class ...
+        ",[10],Need help trying to test function to find area of rectangle using co-ordinates
+"
+            I have a repo with a couple different top level folders and would like to know if there's a way to create separate pull request templates for these folders.
+For instance, let's say I have:
+<repo>...
+        ",[11],azure devops pull request templates: separate template per folder?
+"
+            In C# I want to go over a series of template-objects and want the user to select a coordinate in a grid. Now I have an enumerator and I'm moving to the next object in the ClickEventHandler. But as it ...
+        ",[12],Wait for click in a for loop
+"
+            I'm deploying my Node apps to Google Cloud Run using Cloud Build and I want to run some tests during the build. My tests require some environment variables, so I have been following this guide to ...
+        ",[13],Using Google Cloud Secret as environment variables in Google Cloud Build
+"
+            I have currently a python script that extracts some machine learning coefficients (floats and strings) and saves them in a text file. I need a way to convert those coefficients and save them with ...
+        ",[14],Generation of an Intel format (HEX) or Motorola S-files
+"
+            I need to create a spike neural network to study how it works with internet packet datasets. Question: how can I just create a spike neural network for training and testing it on csv files?
+        ",[15],How to create a simple spike neural network?
