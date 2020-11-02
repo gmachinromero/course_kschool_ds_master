@@ -1,0 +1,82 @@
+descripcion,id,pregunta
+"
+            In a Drupal 8 views, I have a field with a token.
+How to extract the first letter of a word with TWIG ?
+I just want to display the first letter of the token in this field.
+enter image description here
+        ",[1],How to extract the first letter of a word with TWIG?
+"
+            So I have been all over the internet trying to find an answer to what I believe is an easy problem. I am new at posting so please understand. So, to start it is a workbook shared within my department ...
+        ",[2],Issues with Auto Sort with empty text cells at the top instead of the bottom
+"
+            I'm trying to build a table interface that provides strict typing on the value a table column has and a function that executes on the column value and returns a string. I'm having issues using ...
+        ",[3],typescript generic function parameters not inferred in interface
+"
+            I want to try to generate the output of my program as an XML file.
+Not the output that I get it's in this form.
+ ['SW0-ES3-Stream0 ',
+ 'SW0-ES4-Stream1 ',
+ 'SW1-ES4-Stream1 ',
+ 'ES1-SW0-Stream0 ',
+ '...
+        ",[4],Write output in XML file python
+"
+            Our application has 3 Apache Artemis live servers in a cluster. Each live server has a backup server.
+The application is transitioning to containers. The live and backup servers are now running as ...
+        ",[5],Apache Artemis live and backup servers in containerized deployment
+"
+            I'm designing this thing on Qt Designer using PyQt. So I have a QMainWindow from where the user can open a QDialog to Input some data I'm saving in a Json file (AddUser function below)
+What I want is ...
+        ",[6],How to Add Items to QComboBox from another class PyQT?
+"
+            I'm having issues iterating over a list of objects within a template interpreted by the templatefile function.
+I have the following var:
+variable ""destinations"" {
+  description = ""A ...
+        ",[7],Terraform - Iterate over a List of Objects in a Template
+"
+            I have a bean that I am positive is in the package being scanned by spring (all its siblings work successfully).
+
+@Service
+class BeanB {
+
+}
+
+@Service
+@DependsOn(""BeanB"")
+class BeanA {
+
+  @...
+        ",[8],spring is looking for bean named with wrong capitalization for first letter
+"
+            I'm trying to install GDI+ in my windows docker container. I was wondering if it is possible to do this via commands in the dockerfile. I need GDI+ for a method that converts bytes to an image object: ...
+        ",[9],Can I install GDI+ using only commands?
+"
+            I'm using Gulp to compile SCSS into CSS but it doesn't minify it, what would be the best way to do this?
+I also want to minify the JS output.
+Is this the way to use browsersync and compile in gulp?
+//...
+        ",[10],"Minify CSS, JS and create it's map with Gulp"
+"
+            I have an application in ionic 5, in the mnia page I have a list with an ion-refresher and an ion-infinite-scroll working simultaneously.
+After updating the list with the refresher, if I reach the ...
+        ",[11],Why do ion-refresher and ion-infinite-scroll cause a scroll to top?
+"
+            I'm collaborating on a project and use prettier as my code formatter. The number of collaborators is growing and I just suggested that we install prettier as a dev dependency and set up a config file ...
+        ",[12],Prettier as a dev dependency
+"
+            I would like to start a julia script by using the keyboard shortcut Ctrl+Shift+H.
+When the script starts, the keys Ctrl and Shift will still be pressed.
+I would like to wait that these two keys are ...
+        ",[13],Test if a key is pressed in Julia
+"
+            new to Python logging and having some trouble configuring TimedRotatingFileHandler with dictconfig. Here is my log settings dictionary:
+LOG_SETTINGS = {
+    'version': 1,
+    'disable_existing_loggers'...
+        ",[14],Python configure TimedRotatingFileHandler with dictconfig
+"
+            installing: python-3.7.1-h0371630_7 ...
+Miniconda3-latest-Linux-x86.sh: line 373: /opt/miniconda3/pkgs/python-3.7.1-h0371630_7/bin/python: cannot execute binary file: Exec format error
+I am following ...
+        ",[15],Problem installing Miniconda on chromebook

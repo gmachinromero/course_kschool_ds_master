@@ -6,14 +6,14 @@ from scrapy.selector import Selector
 from scrapy.loader import ItemLoader
 
 
-# Datos a extraer - Determina los datos que tengo que completar, y que se encontrarán en el fichero generado
+# Datos a completar - Determina los datos que tengo que completar, y que se encontrarán en el fichero generado
 # ---------------------------------------------------------------------------------------------------------------
 class Pregunta(Item):
     id = Field()
     pregunta = Field()
     descripcion = Field()
     
-# Clase Spider - Se define el comportamiento
+# Clase Spider - Se define el comportamiento de araña
 # ---------------------------------------------------------------------------------------------------------------
 class StackOverflowSpider(Spider):
     name = "StackOverflowSpider"
@@ -24,7 +24,7 @@ class StackOverflowSpider(Spider):
     # URL semilla
     start_urls = ['https://stackoverflow.com/questions']
     
-    # Funcion a la que se va a llamar, cuando se haga el requerimiento a la URL semilla
+    # Funcion para diseccionar (parse) la respuesta de la solicitud a la URL semilla
     def parse(self, response):
         # Selectores: Clase de scrapy para extraer datos
         sel = Selector(response)
@@ -35,10 +35,11 @@ class StackOverflowSpider(Spider):
         for pregunta in preguntas:
             # Instanciamos el ítem Pregunta, e indicamos en que variable puede encontrar la información
             item = ItemLoader(Pregunta(), pregunta)
-            # Lleno los atributos del ítem Pregunta
+            # Completo los atributos del ítem Pregunta
             item.add_value('id', i)
             item.add_xpath('pregunta', './/h3/a/text()')                         # El punto del XPath indica ruta relativa
             item.add_xpath('descripcion', './/div[@class="excerpt"]/text()')     # El punto del XPath indica ruta relativa
             i += 1
+            
             # Hago Yield de la informacion para que se escriban los datos del ítem Pregunta, en un archivo
             yield item.load_item()
