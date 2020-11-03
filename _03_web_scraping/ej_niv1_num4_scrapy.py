@@ -12,7 +12,7 @@ class Noticia(Item):
     titular = Field()
     descripcion = Field()
 
-# Clase Spider - Se define el comportamiento de araña
+# Clase Spider - Se define el comportamiento de la araña
 # ---------------------------------------------------------------------------------------------------------------
 class ElUniversoSpider(Spider):
     name = "ElUniversoSpider"
