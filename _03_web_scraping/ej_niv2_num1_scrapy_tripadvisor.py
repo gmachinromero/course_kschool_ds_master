@@ -5,6 +5,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.selector import Selector
 from scrapy.loader import ItemLoader
+from scrapy.loader.processors import MapCompose
 
 
 # Datos a completar - Determina los datos que tengo que completar, y que se encontrarán en el fichero generado
@@ -29,13 +30,17 @@ class TripAdvisorSpider(CrawlSpider):
     start_urls = ['https://www.tripadvisor.com/Hotels-g187514-Madrid-Hotels.html']
 
     # Programamos un delay (segundos) para evitar ser baneados
-    download_delay = 2
+    download_delay = 1
 
     # Definimos a que URLs dentro de la URL semilla tiene que ir o no la CrawlSpider. En este caso, la araña se
     # va a obtener todos aquellos links de la URL semilla que contengan el string '/Hotel_Review-g187514-' y en 
     # cada uno de ellos se ejecutará la función de parseo
-    rules = (Rule(LinkExtractor(allow = r'/Hotel_Review-g187514-'), follow = True, callback = 'parse_item'), # r es de RegEx
-            None)
+    rules = (Rule(LinkExtractor(allow = r'/Hotel_Review-g187514-'), follow = True, callback = 'parse_item'),) # r es de RegEx
+
+    # Función de limpieza de los campos descriptivos
+    def data_cleaning(self, text):
+        clean_text = text.replace('\n', '').replace('\r', '').replace('\t', '')
+        return clean_text
 
     # Funcion para diseccionar (parse) la respuesta de la solicitud a la URL semilla. Esta función se ejecuta
     # en cada link que cumpla las reglas definidas en la tupla rules
@@ -48,13 +53,17 @@ class TripAdvisorSpider(CrawlSpider):
         item = ItemLoader(Hotel(), sel)
 
         # Completo los atributos del ítem Hotel
-        item.add_xpath('nombre', '//h1[@id="HEADING"]/text()')
-        item.add_xpath('descripcion', '//div[contains(@class, "_2-hMril5")]//div[contains(@class, "cPQsENeY")]/text()')
-        item.add_xpath('servicios', '//div[contains(@class, "_1nAmDotd")][1]//div[contains(@class, "_2rdvbNSg")]/text()')
+        item.add_xpath('nombre',
+                       '//h1[@id="HEADING"]/text()')
+        item.add_xpath('descripcion',
+                       '//div[contains(@class, "_2-hMril5")]//div[contains(@class, "cPQsENeY")]/text()',
+                       MapCompose(self.data_cleaning))
+        item.add_xpath('servicios',
+                       '//div[contains(@class, "_1nAmDotd")][1]//div[contains(@class, "_2rdvbNSg")]/text()')
 
         # Hago Yield de la informacion para que se escriban los datos del ítem Hotel, en un archivo
         yield item.load_item()
 
 # Ejecución
 # ---------------------------------------------------------------------------------------------------------------
-# scrapy runspider ej_niv2_num1_scraoy.py -o ej_niv2_num1_scraoy.json -t json
+# scrapy runspider ej_niv2_num1_scrapy_tripadvisor.py -o ej_niv2_num1_scrapy_tripadvisor.json
