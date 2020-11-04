@@ -15,12 +15,13 @@ class Hotel(Item):
     descripcion = Field()
     servicios = Field()
 
+
 # Clase CrawlSpider - Se define el comportamiento de la araña
 # ---------------------------------------------------------------------------------------------------------------
 class TripAdvisorSpider(CrawlSpider):
     name = "TripAdvisorSpider"
     
-    # User-Agent
+    # Custom settings
     custom_settings = {'USER_AGENT':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
     
     # Reduce el espectro de busqueda de URLs. No nos podemos salir de los dominios de esta lista
@@ -37,9 +38,9 @@ class TripAdvisorSpider(CrawlSpider):
     # cada uno de ellos se ejecutará la función de parseo
     rules = (Rule(LinkExtractor(allow = r'/Hotel_Review-g187514-'), follow = True, callback = 'parse_item'),) # r es de RegEx
 
-    # Función de limpieza de los campos descriptivos
+    # Función de limpieza de los campos descriptivos (se puede sustituir por una lambda como argumento del MapCompose())
     def data_cleaning(self, text):
-        clean_text = text.replace('\n', '').replace('\r', '').replace('\t', '')
+        clean_text = text.replace('\n', ' ').replace('\r', ' ').replace('\t', ' ')
         return clean_text
 
     # Funcion para diseccionar (parse) la respuesta de la solicitud a la URL semilla. Esta función se ejecuta

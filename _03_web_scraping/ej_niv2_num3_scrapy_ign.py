@@ -11,15 +11,15 @@ from scrapy.loader.processors import MapCompose
 # Datos a completar - Determina los datos que tengo que completar, y que se encontrarán en el fichero generado
 # ---------------------------------------------------------------------------------------------------------------
 class Articulo(Item):
-    titulo = Field()
+    titulo_art = Field()
     contenido = Field()
 
 class Review(Item):
-    titulo = Field()
+    titulo_rev = Field()
     calificacion = Field()
 
 class Video(Item):
-    titulo = Field()
+    titulo_vid = Field()
     fecha_de_publicacion = Field()
 
 
@@ -30,7 +30,7 @@ class IgnCrawler(CrawlSpider):
 
     # Custom settings
     custom_settings = {'USER_AGENT':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
-                       'CLOSESPIDER_PAGECOUNT': 20} # Control del número de URLs parseadas
+                       'CLOSESPIDER_PAGECOUNT': 30} # Control del número de URLs parseadas
 
     # Reduce el espectro de busqueda de URLs. No nos podemos salir de los dominios de esta lista
     allowed_domains = ['latam.ign.com']
@@ -43,16 +43,12 @@ class IgnCrawler(CrawlSpider):
 
     # Reglas de crawling (tupla)
     rules = (
-        # crawling horizontal por tipo
-        Rule(LinkExtractor(allow = r'/type='), follow = True),
-        # crawling horizontal por número de página dentro de cada tipo
-        Rule(LinkExtractor(allow = r'/&page='), follow = True),
-        # crawling vertical: Articulos
-        Rule(LinkExtractor(allow = r'/news/'), follow = True, callback = 'parse_articulo'),
-        # crawling vertical: Reviews
-        Rule(LinkExtractor(allow = r'/review/'), follow = True, callback = 'parse_review'),
-        # crawling vertical: Videos
-        Rule(LinkExtractor(allow = r'/video/'), follow = True, callback = 'parse_video'),)
+        Rule(LinkExtractor(allow = r'/type='), follow = True),                                # horizontal: tipo
+        Rule(LinkExtractor(allow = r'/&page='), follow = True),                               # horizontal: paginación
+        Rule(LinkExtractor(allow = r'/news/'), follow = True, callback = 'parse_articulo'),   # vertical: Articulos
+        Rule(LinkExtractor(allow = r'/review/'), follow = True, callback = 'parse_review'),   # vertical: Reviews
+        Rule(LinkExtractor(allow = r'/video/'), follow = True, callback = 'parse_video'),)    # vertical: Videos
+
 
     # Función de limpieza de los campos descriptivos (se puede sustituir por una lambda como argumento del MapCompose())
     def text_cleaning(self, text):
@@ -62,37 +58,26 @@ class IgnCrawler(CrawlSpider):
 
     # Funcion para diseccionar (parse) la respuesta de la solicitud a la URL semilla. Esta función se ejecuta
     # en cada link que cumpla las reglas definidas en la tupla rules
+
+    # Artículo
     def parse_articulo(self, response):
-        # Selectores: Clase de scrapy para extraer datos
-        sel = Selector(response)
-        # Instanciamos el ítem Articulo, e indicamos en que variables puede encontrar la información
-        item = ItemLoader(Articulo(), sel)
-         # Completo los atributos del ítem Articulo
-        item.add_xpath('titulo', '//h1/text()', MapCompose(self.text_cleaning))
-        item.add_xpath('contenido', '//span[@class="side-wrapper side-wrapper hexagon-content"]/text()', MapCompose(self.text_cleaning))
-        # Hago Yield de la informacion para que se escriban los datos del ítem Articulo, en un archivo
+        item = ItemLoader(Articulo(), response)
+        item.add_xpath('titulo_art', '//h1/text()', MapCompose(self.text_cleaning))
+        item.add_xpath('contenido', '//div[@id="id_text"]//*/text()', MapCompose(self.text_cleaning))
         yield item.load_item()
 
+    # Review
     def parse_review(self, response):
-        # Selectores: Clase de scrapy para extraer datos
-        sel = Selector(response)
-        # Instanciamos el ítem Review, e indicamos en que variables puede encontrar la información
-        item = ItemLoader(Review(), sel)
-         # Completo los atributos del ítem Review
-        item.add_xpath('titulo', '//h1/text()', MapCompose(self.text_cleaning))
-        item.add_xpath('calificacion', '//div[@id="id_text"]//*/text()', MapCompose(self.text_cleaning))
-        # Hago Yield de la informacion para que se escriban los datos del ítem Review, en un archivo
+        item = ItemLoader(Review(), response)
+        item.add_xpath('titulo_rev', '//h1/text()', MapCompose(self.text_cleaning))
+        item.add_xpath('calificacion', '//span[@class="side-wrapper side-wrapper hexagon-content"]/text()', MapCompose(self.text_cleaning))
         yield item.load_item()
 
+    # Video
     def parse_video(self, response):
-        # Selectores: Clase de scrapy para extraer datos
-        sel = Selector(response)
-        # Instanciamos el ítem Video, e indicamos en que variables puede encontrar la información
-        item = ItemLoader(Video(), sel)
-         # Completo los atributos del ítem Video
-        item.add_xpath('titulo', '//h1/text()', MapCompose(self.text_cleaning))
+        item = ItemLoader(Video(), response)
+        item.add_xpath('titulo_vid', '//h1/text()', MapCompose(self.text_cleaning))
         item.add_xpath('fecha_de_publicacion', '//span[@class="publish-date"]/text()', MapCompose(self.text_cleaning))
-        # Hago Yield de la informacion para que se escriban los datos del ítem Video, en un archivo
         yield item.load_item()
 
 

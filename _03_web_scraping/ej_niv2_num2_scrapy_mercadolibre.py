@@ -23,7 +23,7 @@ class MercadoLibreCrawler(CrawlSpider):
 
     # Custom settings
     custom_settings = {'USER_AGENT':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
-                       'CLOSESPIDER_PAGECOUNT': 20} # Control de número de paginas visitadas
+                       'CLOSESPIDER_PAGECOUNT': 20} # Control del número de URLs parseadas
 
     # Reduce el espectro de busqueda de URLs. No nos podemos salir de los dominios de esta lista
     allowed_domains = ['articulo.mercadolibre.com.ec', 'listado.mercadolibre.com.ec']
