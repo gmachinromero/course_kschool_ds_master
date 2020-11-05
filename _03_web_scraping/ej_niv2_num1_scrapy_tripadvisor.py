@@ -65,6 +65,7 @@ class TripAdvisorSpider(CrawlSpider):
         # Hago Yield de la informacion para que se escriban los datos del ítem Hotel, en un archivo
         yield item.load_item()
 
+
 # Ejecución
 # ---------------------------------------------------------------------------------------------------------------
 # scrapy runspider ej_niv2_num1_scrapy_tripadvisor.py -o ej_niv2_num1_scrapy_tripadvisor.json
