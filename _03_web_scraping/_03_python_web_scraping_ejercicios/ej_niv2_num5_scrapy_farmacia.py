@@ -14,7 +14,10 @@ from scrapy.loader.processors import MapCompose
 class Farmacia(Item):
     Nombre = Field()
     Precio = Field()
- 
+
+
+# Clase CrawlSpider - Se define el comportamiento de la araña
+# ------------------------------------------------------------------------------
 class CruzVerdeSpider(CrawlSpider):
     name = 'CruzVerdeSpider'
 
@@ -32,11 +35,11 @@ class CruzVerdeSpider(CrawlSpider):
 
     # Reglas de crawling (tupla)
     rules = (
-        Rule(LinkExtractor(allow=r'start=', 
-                           tags=('a', 'button'), 
-                           attrs=('href', 'data-url')),
-            follow=True,
-            callback="parse_farmacia"),
+        Rule(LinkExtractor(allow = r'start=', 
+                           tags = ('a', 'button'), 
+                           attrs = ('href', 'data-url')),
+            follow = True,
+            callback = "parse_farmacia"),
     )
 
     # Parseo de URLs
