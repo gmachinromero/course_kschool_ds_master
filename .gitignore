@@ -1,4 +1,4 @@
-# ignore all the files inside .ipynb_checkpoints directory #
+# Ignore all the files inside .ipynb_checkpoints directory #
 ############################################################
 .ipynb_checkpoints/
 
@@ -14,3 +14,9 @@
 *.rar
 *.tar
 *.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
