@@ -16,9 +16,10 @@ Los temas cubiertos en el master son:
 - 03_web_scraping
 - 04_data_visualization
 - 05_machine_learning
-- 06_deep_learning
-- 07_R
-- 08_big_data_solutions
+- 06_recommender_systems
+- 07_deep_learning
+- 08_R
+- 09_big_data_solutions
 
 ## 3. Stack
 
